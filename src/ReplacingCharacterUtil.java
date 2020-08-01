@@ -19,10 +19,11 @@ public class ReplacingCharacterUtil {
      * Replace all the spaces with &32 character
      *
      * @param source
+     * @param iSizeOfCharacters
      * @return
      */
-    public String replaceSourceByCharacter(final String source) throws Exception {
-        return replaceSourceByCharacter(source, szReplaceCharacters);
+    public String replaceSourceByCharacter(final String source, int iSizeOfCharacters) throws Exception {
+        return replaceSourceByCharacter(source, iSizeOfCharacters, szReplaceCharacters);
     }
 
     /**
@@ -30,9 +31,10 @@ public class ReplacingCharacterUtil {
      * Replace all the spaces with &32 character
      *
      * @param source
+     * @param iSizeOfCharacters
      * @return
      */
-    public String replaceSourceByCharacter(final String source, String szReplaceChar) throws Exception {
+    public String replaceSourceByCharacter(final String source, int iSizeOfCharacters, String szReplaceChar) throws Exception {
         // Check if source has null
         if (source == null) {
             throw new Exception("Error: Source String Is Null");
@@ -42,9 +44,14 @@ public class ReplacingCharacterUtil {
         String strWithoutEndSpace = source.trim();
         char chWithEndSpace[] = source.toCharArray();
         char chWithoutEndSpace[] = strWithoutEndSpace.toCharArray();
+        int iSizeOfWithoutEndSpace = chWithoutEndSpace.length;
+
+        if (iSizeOfWithoutEndSpace != iSizeOfCharacters) {
+            throw new Exception("Error: Characters Size Without Space Is Wrong");
+        }
 
         // Start Of End Characters To Count Spaces
-        int iSpaceAtEnd = countSpacesAtEnd(chWithoutEndSpace.length, chWithEndSpace);
+        int iSpaceAtEnd = countSpacesAtEnd(iSizeOfCharacters, chWithEndSpace);
         int iSpacesInnerString = countSpacesInnerString(chWithoutEndSpace);
         int iCountReplacedString = szReplaceChar.length();
 

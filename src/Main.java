@@ -14,7 +14,7 @@ public class Main {
         final ReplacingCharacterUtil util = new ReplacingCharacterUtil();
 
         try {
-            String strOutput = util.replaceSourceByCharacter(strInput);
+            String strOutput = util.replaceSourceByCharacter(strInput, 19);
 
             System.out.println("Input: " + strInput);
             System.out.println("Output: " + strOutput);
